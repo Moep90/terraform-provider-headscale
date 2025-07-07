@@ -2,7 +2,7 @@ version: "3"
 services:
   headscale:
     container_name: headscale
-    image: "headscale/headscale:0.23.0"
+    image: "headscale/headscale:0.26.1"
     command: serve
     volumes:
       - ./config.yaml:/etc/headscale/config.yaml
@@ -10,3 +10,7 @@ services:
     ports:
       - 0.0.0.0:8080:8080
       - 0.0.0.0:9090:9090
+networks:
+  headscale-network:
+    driver: bridge
+    name: headscale-test-network
