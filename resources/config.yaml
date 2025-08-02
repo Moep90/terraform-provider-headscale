@@ -232,10 +232,10 @@ log:
 policy:
   # The mode can be "file" or "database" that defines
   # where the ACL policies are stored and read from.
-  mode: file
+  mode: database
   # If the mode is set to "file", the path to a
   # HuJSON file containing ACL policies.
-  path: ""
+  # path: ""
 
 ## DNS
 #
@@ -306,15 +306,6 @@ dns:
   #
   #   # you can also put it in one line
   #   - { name: "prometheus.myvpn.example.com", type: "A", value: "100.64.0.3" }
-
-  # DEPRECATED
-  # Use the username as part of the DNS name for nodes, with this option enabled:
-  # node1.username.example.com
-  # while when this is disabled:
-  # node1.example.com
-  # This is a legacy option as Headscale has have this wrongly implemented
-  # while in upstream Tailscale, the username is not included.
-  # use_username_in_magic_dns: false
 
 # Unix socket used for the CLI to connect without authentication
 # Note: for production you will want to set this to something like:

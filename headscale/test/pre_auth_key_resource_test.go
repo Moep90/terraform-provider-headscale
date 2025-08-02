@@ -11,82 +11,47 @@ func Test_PreAuthKeyResource(t *testing.T) {
 		ProtoV6ProviderFactories: TestAccProtoV6ProviderFactories,
 		Steps: []resource.TestStep{
 			{
-				Config: ProviderConfig + `data "headscale_user" "test_user" {
-			  name = "terraform"
-			}
-
-			resource "headscale_pre_auth_key" "test" {
-			  user = data.headscale_user.test_user.id
-			}
-			`,
+				Config: ProviderConfig + `resource "headscale_pre_auth_key" "test" {
+					user = "1"
+				  }`,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttrPair(
-						"headscale_pre_auth_key.test", "user",
-						"data.headscale_user.test_user", "id",
-					),
+					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "user", "1"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "reusable", "false"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "expired", "false"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "ephemeral", "false"),
 				),
 			},
 			{
-				Config: ProviderConfig + `
-			data "headscale_user" "test_user" {
-			  name = "terraform"
-			}
-
-			resource "headscale_pre_auth_key" "test" {
-			  user     = data.headscale_user.test_user.id
-			  reusable = true
-			}
-			`,
+				Config: ProviderConfig + `resource "headscale_pre_auth_key" "test" {
+					user = "1"
+					reusable = true
+				  }`,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttrPair(
-						"headscale_pre_auth_key.test", "user",
-						"data.headscale_user.test_user", "id",
-					),
+					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "user", "1"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "reusable", "true"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "expired", "false"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "ephemeral", "false"),
 				),
 			},
 			{
-				Config: ProviderConfig + `
-			data "headscale_user" "test_user" {
-			  name = "terraform"
-			}
-
-			resource "headscale_pre_auth_key" "test" {
-			  user      = data.headscale_user.test_user.id
-			  ephemeral = true
-			}
-			`,
+				Config: ProviderConfig + `resource "headscale_pre_auth_key" "test" {
+					user = "1"
+					ephemeral = true
+				  }`,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttrPair(
-						"headscale_pre_auth_key.test", "user",
-						"data.headscale_user.test_user", "id",
-					),
+					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "user", "1"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "reusable", "false"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "expired", "false"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "ephemeral", "true"),
 				),
 			},
 			{
-				Config: ProviderConfig + `
-			data "headscale_user" "test_user" {
-			  name = "terraform"
-			}
-
-			resource "headscale_pre_auth_key" "test" {
-			  user     = data.headscale_user.test_user.id
-			  acl_tags = ["tag:terraform", "tag:terra-form", "tag:terra_form"]
-			}
-			`,
+				Config: ProviderConfig + `resource "headscale_pre_auth_key" "test" {
+					user = "1"
+					acl_tags = ["tag:terraform", "tag:terra-form", "tag:terra_form"]
+				  }`,
 				Check: resource.ComposeAggregateTestCheckFunc(
-					resource.TestCheckResourceAttrPair(
-						"headscale_pre_auth_key.test", "user",
-						"data.headscale_user.test_user", "id",
-					),
+					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "user", "1"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "reusable", "false"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "expired", "false"),
 					resource.TestCheckResourceAttr("headscale_pre_auth_key.test", "ephemeral", "false"),

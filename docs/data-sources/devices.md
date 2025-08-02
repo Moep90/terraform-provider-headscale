@@ -16,14 +16,25 @@ The devices data source allows you to get information about devices registered o
 # Returns all devices
 data "headscale_devices" "all" {}
 
-# Returns all devices that belong to a specified user
+# Returns all devices that belong to a specified user by ID
 data "headscale_devices" "user_devices" {
     user_id = "1"
 }
 
+# Returns all devices that belong to a specified user by name
+data "headscale_devices" "user_devices_by_name" {
+    user_name = "terraform"
+}
+
 # Returns all devices with a specified name prefix
-data "headscale_devices" "user_devices" {
+data "headscale_devices" "prefixed_devices" {
     name_prefix = "domain"
+}
+
+# Returns devices filtered by both user and name prefix
+data "headscale_devices" "filtered_combined" {
+    user_name = "terraform"
+    name_prefix = "subnet"
 }
 ```
 
@@ -33,7 +44,7 @@ data "headscale_devices" "user_devices" {
 ### Optional
 
 - `name_prefix` (String) Filters the device list to elements whose name has the provided prefix.
-- `user` (String) Filters the device list to elements belonging to the user with the provided ID.
+- `user_name` (String) Filters the device list to elements belonging to the user with the provided name.
 
 ### Read-Only
 
@@ -46,6 +57,8 @@ data "headscale_devices" "user_devices" {
 Read-Only:
 
 - `addresses` (List of String) List of the device's ip addresses.
+- `approved_routes` (List of String) The routes that the device is allowed to advertise.
+- `available_routes` (List of String) The routes the device is advertising.
 - `created_at` (String) The time the device entry was created.
 - `expiry` (String) The expiry date of the device.
 - `given_name` (String) The device's given name.
@@ -53,4 +66,5 @@ Read-Only:
 - `name` (String) The device's name.
 - `register_method` (String) The method used to register the device.
 - `tags` (List of String) The tags applied to the device.
-- `user` (String) The ID of the user who owns the device.
+- `user_id` (String) The ID of the user who owns the device.
+- `user_name` (String) The name of the user who owns the device.

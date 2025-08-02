@@ -4,9 +4,11 @@ services:
     container_name: headscale
     image: "headscale/headscale:0.26.1"
     command: serve
+    networks:
+      - headscale-network
     volumes:
       - ./config.yaml:/etc/headscale/config.yaml
-      - ./data/lib:/var/lib/headscale/
+      - ./data:/var/lib/headscale/
     ports:
       - 0.0.0.0:8080:8080
       - 0.0.0.0:9090:9090

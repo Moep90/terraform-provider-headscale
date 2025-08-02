@@ -6,7 +6,16 @@ You can find this provider on the [Terraform Registry](https://registry.terrafor
 
 ## Versions
 
-As of release 0.2.0, this provider supports Headscale v0.23.0. This release changed the API with backwards incompatible changes. For compatibility with the previous API, use releases like 0.1.x.
+Various versions of this provider are created as backwards incompatible changes occur in the Headscale API. This provider will primarily only support the latest version of Headscale. To allow for patching bug fixes for previous version, each minor version will have a new branch created. For example, the 0.1.x releases will be on the `v0.1.x` branch, the 0.2.x releases will be on the `v0.2.x` branch, etc.
+
+Here is a table illustrating provider versions and the Headscale versions they support:
+
+| Provider Version                                                             | Headscale Version |
+| ---------------------------------------------------------------------------- | ----------------- |
+| [0.1.x](https://github.com/awlsring/terraform-provider-headscale/tree/0.1.x) | 0.20.x-0.22.x     |
+| [0.2.x](https://github.com/awlsring/terraform-provider-headscale/tree/0.2.x) | 0.23.x-0.24.x     |
+| [0.3.x](https://github.com/awlsring/terraform-provider-headscale/tree/0.3.x) | 0.25.x            |
+| [0.4.x](https://github.com/awlsring/terraform-provider-headscale/tree/0.4.x) | 0.26.x            |
 
 ## Differences between the Tailscale and Headscale Providers
 
@@ -23,7 +32,7 @@ terraform {
   required_providers {
     headscale = {
       source = "awlsring/headscale"
-      version = "0.1.1"
+      version = "0.3.0"
     }
   }
 }
