@@ -1,14 +1,10 @@
-# Return only active pre auth keys for the user
-resource "headscale_user" "test" {
-  name = "test"
-}
-
+# Return only active pre auth keys for user with ID of 1
 data "headscale_pre_auth_keys" "active_keys" {
-  user = headscale_user.test.id
+    user = "1"
 }
 
-# Return all pre auth keys for the user, including expired
+# Return all pre auth keys for user with ID of 1
 data "headscale_pre_auth_keys" "all_keys" {
-  user = headscale_user.test.id
-  all  = true
+    all = true
+    user = "1"
 }
